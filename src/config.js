@@ -1,0 +1,25 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+// eslint-disable-next-line no-underscore-dangle
+global.__DEV__ = process.env.NODE_ENV !== 'production';
+
+export const server = {
+  port: process.env.PORT || 8443,
+  url: process.env.URL,
+};
+
+export const sslFolder = process.env.SSL_FOLDER;
+
+export const token = process.env.TELEGRAM_BOT_TOKEN;
+
+// https://github.com/nodejs/help/issues/253 or create_ssl_serticifates.sh for creating certificates
+export const tlsPaths = {
+  key: `${sslFolder}certs/server/server.key`, // Path to file with PEM private key
+  cert: `${sslFolder}certs/server/server.crt`, // Path to file with PEM certificate (should be with your url)
+  ca: `${sslFolder}certs/ca/ca.crt`, // This is necessary only if the client uses the self-signed certificate.
+};
+
+export const texasHoldemBotId = process.env.TEXAS_HOLDEM_BOT_ID;
+export const databaseurl = process.env.DATABASE_URL;
