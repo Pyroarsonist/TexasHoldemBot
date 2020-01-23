@@ -1,7 +1,5 @@
-import debugHandler from 'debug';
 import telegram from './core/telegram';
-
-const debug = debugHandler('texas-holdem-bot:startup');
+import models from './data/models';
 
 process
   .on('unhandledRejection', (reason, p) => {
@@ -14,6 +12,7 @@ process
   });
 
 (async () => {
+  await models.sync();
   await telegram();
-  debug('texas-holdem-bot started successfully');
+  console.info('texas-holdem-bot started successfully');
 })();

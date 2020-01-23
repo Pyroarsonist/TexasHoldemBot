@@ -1,4 +1,5 @@
 import debugHandler from 'debug';
+import middleware from './middleware';
 
 const debug = debugHandler('texas-holdem-bot:commands');
 
@@ -7,5 +8,7 @@ export default bot => {
     debug(err);
   });
 
-  bot.start(async ctx => ctx.reply('Hello world!'));
+  bot.use(middleware);
+
+  bot.start(ctx => ctx.reply('Hello world!'));
 };

@@ -3,21 +3,12 @@
 module.exports = {
   parser: 'babel-eslint',
 
-  extends: [
-    'airbnb',
-    'plugin:flowtype/recommended',
-    'prettier',
-    'prettier/flowtype',
-  ],
+  extends: ['airbnb', 'prettier', 'plugin:jest/recommended'],
 
-  plugins: ['flowtype', 'prettier', 'jest'],
+  plugins: ['prettier', 'jest'],
 
   globals: {
     __DEV__: true,
-  },
-
-  env: {
-    browser: true,
     'jest/globals': true,
   },
 
@@ -31,7 +22,6 @@ module.exports = {
 
     // Recommend not to leave any console.log in your code
     // Use console.error, console.warn and console.info instead
-    // https://eslint.org/docs/rules/no-console
     'no-console': [
       'error',
       {
@@ -39,16 +29,15 @@ module.exports = {
       },
     ],
 
+    'arrow-parens': [2, 'as-needed'],
+    'no-param-reassign': 'off',
+    'no-continue': 'off',
     radix: ['error', 'as-needed'],
+    'arrow-body-style': 1,
 
     // Allow only special identifiers
     // https://eslint.org/docs/rules/no-underscore-dangle
-    'no-underscore-dangle': [
-      'error',
-      {
-        allow: ['__typename'],
-      },
-    ],
+    'no-underscore-dangle': 'off',
 
     // Prefer destructuring from arrays and objects
     // http://eslint.org/docs/rules/prefer-destructuring
@@ -71,9 +60,16 @@ module.exports = {
 
     // ESLint plugin for prettier formatting
     // https://github.com/prettier/eslint-plugin-prettier
-    'prettier/prettier': 'error',
-
-    'no-plusplus': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        // https://github.com/prettier/prettier#options
+        singleQuote: true,
+        trailingComma: 'es5',
+        printWidth: 100,
+      },
+    ],
+    'import/extensions': ['error', 'never'],
   },
 
   settings: {
@@ -83,6 +79,9 @@ module.exports = {
       node: {
         moduleDirectory: ['node_modules', 'src'],
       },
+    },
+    react: {
+      version: '999.999.999',
     },
   },
 };

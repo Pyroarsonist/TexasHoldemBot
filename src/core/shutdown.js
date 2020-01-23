@@ -6,7 +6,7 @@ const debug = debugHandler('texas-holdem-bot:shutdown');
 const handlers = [];
 
 const shutdown = async () => {
-  await Promise.all(handlers.map(x => x()));
+  await Promise.allSettled(handlers.map(x => x()));
   process.exit(1);
 };
 
