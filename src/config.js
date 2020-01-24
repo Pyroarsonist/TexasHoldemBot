@@ -15,3 +15,8 @@ export const sslFolder = process.env.SSL_FOLDER;
 export const token = process.env.TELEGRAM_BOT_TOKEN;
 
 export const databaseUrl = process.env.DATABASE_URL;
+
+export const redis = {
+  host: process.env.TELEGRAM_SESSION_HOST || 'localhost',
+  port: process.env.TELEGRAM_SESSION_PORT || 6379,
+};
