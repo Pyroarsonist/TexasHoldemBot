@@ -30,13 +30,27 @@ export default async (ctx, next) => {
     defaults: _user,
   });
   ctx.state.user = user;
-  if (userWasCreated) debug('Created new user %s', user.id);
+  if (userWasCreated) {
+    debug('Created new user %s', user.id);
+  } else {
+    _.forEach(_.omit(_user, 'id'), (val, key) => {
+      user[key] = val;
+    });
+    await user.save();
+  }
   const _chat = formatChat(ctx.chat);
   const [chat, chatWasCreated] = await Chat.findOrCreate({
     where: { id: _chat.id },
     defaults: _chat,
   });
   ctx.state.chat = chat;
-  if (chatWasCreated) debug('Created new chat %s', chat.id);
+  if (chatWasCreated) {
+    debug('Created new chat %s', chat.id);
+  } else {
+    _.forEach(_.omit(_chat, 'id'), (val, key) => {
+      chat[key] = val;
+    });
+    await chat.save();
+  }
   return next(ctx);
 };
